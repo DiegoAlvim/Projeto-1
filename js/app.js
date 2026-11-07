@@ -159,7 +159,7 @@ function speakText(text) {
     
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'pt-BR'; // Idioma português do Brasil
-    utterance.rate = 1.5;     // Velocidade da fala
+    utterance.rate = 1.3;     // Velocidade da fala
     
     window.speechSynthesis.speak(utterance);
 }
