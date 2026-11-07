@@ -1,0 +1,488 @@
+:root {
+    --bg-solid: #090d16; 
+    --text-color: #f8fafc;
+    --card-bg: #131c2c;  
+    --card-bg-pure: #0f172a;
+    --cyan-neon: #00f0ff;
+    --accent-secondary: #6366f1;
+    --border-color: rgba(0, 240, 255, 0.25);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    --modal-overlay: rgba(5, 8, 15, 0.85);
+}
+
+[data-theme="light"] {
+    --bg-solid: #f1f5f9;
+    --text-color: #0f172a;
+    --card-bg: #ffffff;
+    --card-bg-pure: #e2e8f0;
+    --cyan-neon: #4f46e5; 
+    --accent-secondary: #0ea5e9;
+    --border-color: rgba(79, 70, 229, 0.2);
+    --shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    --modal-overlay: rgba(15, 23, 42, 0.4);
+}
+
+[data-theme="beige"] {
+    --bg-solid: #f4eae0;
+    --text-color: #433520;
+    --card-bg: #fcf8f2;
+    --card-bg-pure: #dfd3c3;
+    --cyan-neon: #ff6b6b; 
+    --accent-secondary: #706233;
+    --border-color: rgba(112, 98, 51, 0.25);
+    --shadow: 0 10px 25px rgba(67, 53, 32, 0.08);
+    --modal-overlay: rgba(67, 53, 32, 0.4);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    background-color: var(--bg-solid) !important;
+    color: var(--text-color);
+    overflow-x: hidden;
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://w3.org' viewBox='0 0 1000 500'%3E%3Cg stroke='%2300f0ff' stroke-width='2' opacity='0.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M150 120h40v20h-40zm60 30h30v40h-30zm60 60h60v20h-60zm100-30h40v30h-40zm80 60h60v20h-60zm90-80h40v40h-40zm70 50h30v30h-30zm-490 140h30v20h-30zm60 30h40v20h-40zm90-40h50v30h-50zm80 40h30v30h-30zm90-60h60v20h-60zm90 30h40v20h-40z'/%3E%3Cpath d='M80 200c40-20 80-35 140-35s110 15 170 35 110 35 190 20 110-30 150-35' stroke-dasharray='6 6' stroke-width='1.5'/%3E%3C/g%3E");
+    background-repeat: no-repeat;
+    background-size: 130% auto;
+    background-position: center 30%;
+    background-attachment: fixed;
+    transition: background-position 2s cubic-bezier(0.25, 1, 0.5, 1), background-size 2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 10%;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--card-bg-pure);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--cyan-neon);
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.select-theme {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-solid);
+    color: var(--text-color);
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+}
+
+.btn-currency {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--cyan-neon);
+    background-color: var(--cyan-neon);
+    color: #050a0f;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 6rem 1rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 0 0 50px 50px;
+    margin-bottom: 2rem;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-container input {
+    flex: 1;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    font-size: 1rem;
+    background-color: var(--bg-solid);
+    color: var(--text-color);
+    outline: none;
+}
+
+.search-container button {
+    padding: 0 1.5rem;
+    background-color: var(--cyan-neon);
+    color: #050a0f;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Grid de Cards */
+.container { padding: 2rem 10%; }
+.container h2 { margin-bottom: 1.5rem; }
+.grid-cities {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    border-color: var(--cyan-neon);
+}
+
+.card-header h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.card-footer { margin-top: 1.5rem; }
+
+.btn-details {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--cyan-neon);
+    background: transparent;
+    color: var(--cyan-neon);
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-details:hover {
+    background-color: var(--cyan-neon);
+    color: #050a0f;
+}
+
+/* Janela Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--modal-overlay);
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background-color: var(--bg-solid);
+    margin: 4% auto;
+    padding: 2rem;
+    border: 1px solid var(--cyan-neon);
+    width: 90%;
+    max-width: 520px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    position: relative;
+    animation: modalSlideUp 0.3s ease forwards;
+}
+
+.close-modal {
+    position: absolute;
+    right: 1.5rem;
+    top: 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text-color);
+    opacity: 0.5;
+}
+
+.close-modal:hover { color: var(--cyan-neon); }
+
+/* ==========================================
+   [NOVO] ESTILO DO CARROSSEL DE IMAGENS
+   ========================================== */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.carousel-slides {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slides img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorta a foto mantendo a proporção */
+    flex-shrink: 0;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 0.5rem 0.8rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.carousel-btn:hover {
+    background: var(--cyan-neon);
+    color: #000;
+}
+
+.carousel-btn.prev { left: 10px; }
+.carousel-btn.next { right: 10px; }
+
+.modal-total {
+    font-size: 1.2rem;
+    margin: 1rem 0 1.5rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 2px dashed var(--border-color);
+}
+
+.cost-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.cost-table th, .cost-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.cost-table th {
+    font-weight: 700;
+    color: var(--cyan-neon);
+}
+
+/* Suporte EVA */
+.copilot-container {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    background-color: var(--card-bg-pure);
+    border: 1.5px solid var(--cyan-neon);
+    padding: 1.2rem;
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+}
+
+.eva-name { color: var(--cyan-neon); font-weight: bold; }
+.copilot-avatar svg { animation: floatEVA 3s ease-in-out infinite; }
+
+/* Componentes da Robozinha */
+.fixed-assistant-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    z-index: 3000;
+    cursor: pointer;
+}
+
+.assistant-avatar-neon svg { animation: floatEVA 4s ease-in-out infinite; }
+
+.assistant-speech-bubble {
+    background-color: var(--card-bg-pure);
+    border: 1.5px solid var(--cyan-neon);
+    padding: 0.85rem 1.2rem;
+    border-radius: 16px 16px 0 16px;
+    max-width: 250px;
+    box-shadow: var(--shadow);
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.assistant-speech-bubble p { font-size: 0.8rem; color: var(--text-color); line-height: 1.4; }
+
+.animated-eyes {
+    animation: blinkAndLook 5s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes blinkAndLook {
+    0%, 45%, 55%, 100% { transform: scaleY(1) translateX(0); }
+    48%, 52% { transform: scaleY(0.1) translateX(0); }
+    65%, 75% { transform: scaleY(1) translateX(-1.5px); }
+    80%, 90% { transform: scaleY(1) translateX(1.5px); }
+}
+
+.animated-mouth { animation: talkingMouth 0.8s ease-in-out infinite alternate; }
+
+@keyframes talkingMouth {
+    0% { d: path("M24 36 Q30 39 36 36"); }
+    100% { d: path("M24 36 Q30 42 36 36"); }
+}
+
+/* Jato Neon */
+.plane-overlay {
+    position: fixed;
+    top: 45%;
+    left: -100px;
+    pointer-events: none;
+    z-index: 2000;
+    display: none;
+    color: var(--cyan-neon);
+}
+
+.plane-overlay.fly {
+    display: block;
+    animation: planeHorizontalCruise 3.5s linear forwards;
+}
+
+@keyframes floatEVA {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+}
+
+@keyframes planeHorizontalCruise {
+    0% { left: -100px; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { left: 110%; opacity: 0; }
+}
+
+@keyframes textShimmer {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+.shimmer-effect { animation: textShimmer 0.4s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: scale(0.95) translateY(5px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes modalSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Cole este bloco exatamente no final do seu arquivo style.css existente */
+
+/* ==========================================================================
+   ESTILIZAÇÃO DA BARRA DE OPÇÕES ESTILO WINDOWS 11 (ACCORDION)
+   ========================================================================== */
+.accordion-section {
+    margin-top: 3rem;
+}
+
+.accordion-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Espaçamento idêntico entre os blocos da foto */
+    width: 100%;
+}
+
+.accordion-item {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px; /* Bordas levemente arredondadas clássicas do Windows 11 */
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.accordion-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.accordion-header:hover {
+    background-color: rgba(0, 240, 255, 0.04);
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.accordion-arrow {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    transition: transform 0.3s ease;
+}
+
+/* Painel de Conteúdo Interno Oculto */
+.accordion-content {
+    max-height: 0; /* Começa fechado */
+    overflow: hidden;
+    padding: 0 1.5rem;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: max-height 0.3s ease-out, padding 0.3s ease;
+}
+
+.accordion-content p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    opacity: 0.85;
+    padding-bottom: 1.25rem;
+}
+
+/* CLASSES DE ATIVAÇÃO VIA JAVASCRIPT */
+.accordion-item.active {
+    border-color: var(--cyan-neon);
+    box-shadow: 0 4px 15px rgba(0, 240, 255, 0.1);
+}
+
+.accordion-item.active .accordion-arrow {
+    transform: rotate(180deg); /* Gira a setinha para cima estilo Windows */
+    color: var(--cyan-neon);
+}
+
+.accordion-item.active .accordion-content {
+    padding: 1rem 1.5rem 0 1.5rem;
+}

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NomadCost 🌍 | Custo de Vida para Nômades Digitais</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Elemento de Animação do Jato Neon -->
+    <div id="plane-animation" class="plane-overlay" aria-hidden="true">
+        <svg width="60" height="40" viewBox="0 0 60 40" fill="none" xmlns="http://w3.org">
+            <path d="M55 20L10 5L20 20L10 35L55 20Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M20 20H55" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="8" y1="20" x2="0" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+    </div>
+
+    <!-- Robozinha Humana Arredondada -->
+    <div class="fixed-assistant-container" id="main-assistant" aria-live="polite">
+        <div class="assistant-speech-bubble">
+            <p id="assistant-bubble-text">Olá, Comandante! Aponte para um destino na tela e eu te darei relatórios de voz imediatos!</p>
+        </div>
+        <div class="assistant-avatar-neon">
+            <svg width="80" height="80" viewBox="0 0 60 60" fill="none" xmlns="http://w3.org">
+                <ellipse cx="30" cy="26" rx="18" ry="22" fill="var(--card-bg-pure)" stroke="var(--cyan-neon)" stroke-width="2.5"/>
+                <path d="M16 32C18 38 22 43 30 45C38 43 42 38 44 32" stroke="var(--accent-secondary)" stroke-width="1"/>
+                <g class="animated-eyes">
+                    <ellipse class="eye-left" cx="21" cy="22" rx="4" ry="4" fill="var(--cyan-neon)"/>
+                    <ellipse class="eye-right" cx="39" cy="22" rx="4" ry="4" fill="var(--cyan-neon)"/>
+                </g>
+                <path class="animated-mouth" d="M24 36 Q30 39 36 36" stroke="var(--cyan-neon)" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <path d="M15 18C20 12 40 12 45 18" stroke="var(--accent-secondary)" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">🌍 NomadCost</div>
+        <nav class="nav-controls" aria-label="Controles do Sistema">
+            <select id="theme-select" class="select-theme" aria-label="Selecione o tema visual">
+                <option value="dark">🌌 Tema Escuro</option>
+                <option value="light">☀️ Tema Claro</option>
+                <option value="beige">⏳ Tema Beige</option>
+            </select>
+            <button id="currency-toggle" class="btn-currency">💵 Moeda: USD</button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Para onde vamos levar o seu escritório hoje?</h1>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Digite uma cidade... ex: Nova York, Bali, Lisboa" aria-label="Buscar cidade destino">
+            <button id="search-button">Explorar 🚀</button>
+        </div>
+    </section>
+
+    <!-- Área Principal dos Cards -->
+    <main class="container">
+        <h2>📌 Destinos Disponíveis</h2>
+        <div class="grid-cities" id="cities-container"></div>
+    </main>
+
+    <!-- [NOVO] BARRA DE OPÇÕES ESTILO WINDOWS 11 (ACCORDION) -->
+    <section class="container accordion-section">
+        <h2>🛠️ Central de Planejamento</h2>
+        <div class="accordion-group">
+
+            <!-- Item 1: Lugares mais visitados -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span class="header-title">🌍 Lugares mais visitados</span>
+                    <span class="accordion-arrow">▼</span>
+                </button>
+                <div class="accordion-content">
+                    <p>Nossos radares indicam que <strong>Lisboa, Bali e Nova York</strong> lideram as conexões de nômades digitais nesta temporada devido ao ecossistema de infraestrutura e comunidade ativa.</p>
+                </div>
+            </div>
+
+            <!-- Item 2: Melhores preços viagens -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span class="header-title">📉 Melhores preços viagens</span>
+                    <span class="accordion-arrow">▼</span>
+                </button>
+                <div class="accordion-content">
+                    <p>Atualmente, <strong>Florianópolis e Medellín</strong> oferecem a melhor relação de custo-benefício, permitindo custos de subsistência mensais abaixo de $1.200 USD com excelente internet.</p>
+                </div>
+            </div>
+
+            <!-- Item 3: Pacotes completos -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span class="header-title">📦 Pacotes completos</span>
+                    <span class="accordion-arrow">▼</span>
+                </button>
+                <div class="accordion-content">
+                    <p>Explore nossos módulos premium que incluem mapeamento de voss, reservas de coliving homologados com Wi-Fi de alta velocidade e seguro saúde internacional integrado.</p>
+                </div>
+            </div>
+
+            <!-- Item 4: Dúvidas frequentes -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span class="header-title">❓ Dúvidas frequentes</span>
+                    <span class="accordion-arrow">▼</span>
+                </button>
+                <div class="accordion-content">
+                    <p><strong>Como funciona o cálculo?</strong> Os custos são baseados na média local atualizada de aluguéis privados, passes de coworking, alimentação básica e transporte.</p>
+                </div>
+            </div>
+
+            <!-- Item 5: Fale conosco -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span class="header-title">✉️ Fale conosco</span>
+                    <span class="accordion-arrow">▼</span>
+                </button>
+                <div class="accordion-content">
+                    <p>Precisa de suporte na rota operacional? Envie uma mensagem de transmissão para a nossa central através do e-mail: <strong>suporte@nomadcost.io</strong></p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Janela Modal Inteligente -->
+    <div id="cost-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-content">
+            <button class="close-modal" aria-label="Fechar painel de custos">&times;</button>
+            <div class="copilot-container">
+                <div class="copilot-avatar">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://w3.org">
+                        <ellipse cx="30" cy="22" rx="18" ry="12" fill="var(--card-bg-pure)" stroke="var(--cyan-neon)" stroke-width="2"/>
+                        <ellipse cx="30" cy="22" rx="13" ry="7" fill="var(--bg-solid)"/>
+                        <ellipse cx="23" cy="22" rx="3" ry="2" fill="var(--cyan-neon)"/>
+                        <ellipse cx="37" cy="22" rx="3" ry="2" fill="var(--cyan-neon)"/>
+                        <path d="M22 36C22 36 20 48 30 48C40 48 38 36 38 36" fill="none" stroke="var(--cyan-neon)" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="copilot-speech">
+                    <strong class="eva-name">E.V.A. Co-Pilot 🤖</strong>
+                    <p id="copilot-text">Analisando métricas de conectividade...</p>
+                </div>
+            </div>
+            <div class="carousel-container">
+                <div class="carousel-slides" id="carousel-slides"></div>
+                <button class="carousel-btn prev" id="carousel-prev" aria-label="Imagem anterior">❮</button>
+                <button class="carousel-btn next" id="carousel-next" aria-label="Próxima imagem">❯</button>
+            </div>
+            <h2 id="modal-title">🗽 Detalhes de Custo</h2>
+            <div class="modal-body">
+                <p class="modal-total">Total Estimado: <strong id="modal-total-value" class="price-convert" data-value="0">$ 0</strong> / mês</p>
+                <table class="cost-table">
+                    <thead><tr><th>Item de Gasto</th><th>Custo Estimado</th></tr></thead>
+                    <tbody id="table-data"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer style="text-align: center; padding: 2rem; border-top: 1px solid var(--border-color); margin-top: 4rem; font-size: 0.85rem; opacity: 0.5;">
+        <p>&copy; 2026 NomadCost. Inteligência de Custos em Tempo Real para Nômades Digitais.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
