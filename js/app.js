@@ -153,7 +153,15 @@ const genericExpenses = [
 // 2. FUNÇÃO DE VOZ SILENCIADA (ÁUDIO REMOVIDO 🔕)
 // ==========================================
 function speakText(text) {
-    window.speechSynthesis.cancel(); 
+    window.speechSynthesis.cancel(); // Cancela qualquer áudio anterior
+    
+    if (!text) return; // Se não houver texto, não faz nada
+    
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'pt-BR'; // Idioma português do Brasil
+    utterance.rate = 1.5;     // Velocidade da fala
+    
+    window.speechSynthesis.speak(utterance);
 }
 
 const citiesContainer = document.getElementById('cities-container');
